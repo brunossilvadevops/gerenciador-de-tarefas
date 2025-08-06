@@ -23,3 +23,5 @@ Projeto simples de gerenciamento de tarefas para ajudar a organizar suas ativida
 ---
 
 Projeto simples ideal para aprendizado e prática de desenvolvimento web.
+<img width="449" height="240" alt="image" src="https://github.com/user-attachments/assets/244568e7-0303-481d-bf56-c0e7c570cc97" />
+

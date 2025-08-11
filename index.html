@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- Define o conjunto de caracteres usado na página -->
+    <meta charset="UTF-8">
+
+    <!-- Título que aparece na aba do navegador -->
+    <title>Gerenciador de Tarefas</title>
+
+    <!-- Link para o arquivo CSS externo que define o estilo da página -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Container principal que agrupa todo o conteúdo -->
+    <div class="container">
+        <!-- Título principal da aplicação -->
+        <h1>Gerenciador de Tarefas</h1>
+
+        <!-- Formulário para adicionar novas tarefas -->
+        <form id="task-form">
+            <!-- Campo de texto onde o usuário digita a tarefa -->
+            <input type="text" id="task-input" placeholder="Digite uma nova tarefa..." required>
+            
+            <!-- Botão para enviar a tarefa para a lista -->
+            <button type="submit">Adicionar</button>
+        </form>
+
+        <!-- Lista não ordenada onde as tarefas serão exibidas -->
+        <ul id="task-list"></ul>
+    </div>
+
+    <!-- Link para o arquivo JavaScript externo que controla a lógica da aplicação -->
+    <script src="script.js"></script>
+</body>
+</html>

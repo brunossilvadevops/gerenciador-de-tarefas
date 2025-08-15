@@ -1,43 +1,73 @@
-/* Define o fundo da página e a fonte padrão */
 body {
-    background: #f0f4f8; /* Cor clara para o fundo */
-    font-family: Arial, sans-serif; /* Fonte sem serifa */
+    background: #f0f4f8;
+    font-family: Arial, sans-serif;
 }
 
-/* Container central da aplicação */
 .container {
-    max-width: 400px; /* Largura máxima do conteúdo */
-    margin: 40px auto; /* Centraliza horizontalmente com espaçamento vertical */
-    background: #fff; /* Fundo branco */
-    padding: 24px 20px; /* Espaçamento interno */
-    border-radius: 8px; /* Cantos arredondados */
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08); /* Sombra suave */
+    max-width: 400px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 24px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
 }
 
-/* Título principal */
-h1 {
-    text-align: center; /* Centraliza o texto */
-    color: #123f83; /* Azul escuro */
-    margin-bottom: 20px; /* Espaço abaixo do título */
+h1, h2 {
+    text-align: center;
+    color: #123f83;
 }
 
-/* Layout do formulário */
 form {
-    display: flex; /* Coloca os elementos na mesma linha */
-    gap: 8px; /* Espaçamento entre input e botão */
-    margin-bottom: 16px; /* Espaço abaixo do formulário */
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
 }
 
-/* Campo de texto */
 input[type="text"] {
-    flex: 1; /* Faz o input ocupar todo o espaço disponível */
-    padding: 8px; /* Espaçamento interno */
-    border: 1px solid #b2b3b4; /* Borda cinza clara */
-    border-radius: 4px; /* Cantos arredondados */
-    font-size: 1rem; /* Tamanho da fonte */
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #b2b3b4;
+    border-radius: 4px;
+    font-size: 1rem;
 }
 
-/* Botão principal */
 button {
-    padding: 8px 16px; 
-}/* Espaçamento*
+    padding: 8px 16px;
+    background-color: #123f83;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0e3266;
+}
+
+li {
+    padding: 8px;
+    margin-bottom: 8px;
+    background: #f7f7f7;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 4px;
+}
+
+li.completed {
+    text-decoration: line-through;
+    color: gray;
+}
+
+.remove-btn {
+    background: red;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.remove-btn:hover {
+    background: darkred;
+}

@@ -1,66 +1,104 @@
-const form = document.getElementById('task-form');
-const input = document.getElementById('task-input');
-const list = document.getElementById('task-list');
-const completedList = document.getElementById('completed-list');
+document.addEventListener('DOMContentLoaded', () => {
+    const taskForm = document.getElementById('task-form');
+    const taskInput = document.getElementById('task-input');
+    const taskList = document.getElementById('task-list');
+    const completedList = document.getElementById('completed-list');
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabContents = document.querySelectorAll('.tab-content');
 
-form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    const taskText = input.value.trim();
-    if (taskText !== '') {
-        addTask(taskText);
-        input.value = '';
-        input.focus();
+    function showTab(tabId) {
+        tabContents.forEach(content => {
+            content.classList.remove('active');
+        });
+        tabButtons.forEach(button => {
+            button.classList.remove('active');
+        });
+        document.getElementById(`${tabId}-content`).classList.add('active');
+        document.querySelector(`.tab-button[data-tab="${tabId}"]`).classList.add('active');
     }
+
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const tabId = button.dataset.tab;
+            showTab(tabId);
+        });
+    });
+
+    showTab('active-tasks');
+
+    taskForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const taskText = taskInput.value.trim();
+        if (taskText !== '') {
+            addTask(taskText);
+            taskInput.value = '';
+        }
+    });
+
+    function addTask(taskText, isCompleted = false) {
+        const listItem = document.createElement('li');
+        
+        const taskTextSpan = document.createElement('span');
+        taskTextSpan.textContent = taskText;
+
+        const taskButtonsDiv = document.createElement('div');
+        taskButtonsDiv.classList.add('task-buttons');
+        
+        // Botão de concluir/desfazer
+        const completeButton = document.createElement('button');
+        const completeIcon = document.createElement('i');
+        completeIcon.classList.add('fas');
+        completeIcon.classList.add(isCompleted ? 'fa-redo-alt' : 'fa-check-circle');
+        completeButton.appendChild(completeIcon);
+        
+        completeButton.addEventListener('click', () => {
+            if (listItem.classList.contains('completed')) {
+                listItem.classList.remove('completed');
+                completeIcon.classList.remove('fa-redo-alt');
+                completeIcon.classList.add('fa-check-circle');
+                taskList.appendChild(listItem);
+            } else {
+                listItem.classList.add('completed');
+                completeIcon.classList.remove('fa-check-circle');
+                completeIcon.classList.add('fa-redo-alt');
+                completedList.appendChild(listItem);
+            }
+        });
+
+        // Botão de edição
+        const editButton = document.createElement('button');
+        editButton.innerHTML = '<i class="fas fa-edit"></i>';
+        editButton.addEventListener('click', () => {
+            const newTaskText = prompt('Editar tarefa:', taskTextSpan.textContent);
+            if (newTaskText !== null && newTaskText.trim() !== '') {
+                taskTextSpan.textContent = newTaskText.trim();
+            }
+        });
+
+        // Botão de exclusão
+        const deleteButton = document.createElement('button');
+        deleteButton.innerHTML = '<i class="fas fa-trash-alt"></i>';
+        deleteButton.addEventListener('click', () => {
+            if (confirm('Tem certeza que deseja excluir esta tarefa?')) {
+                listItem.remove();
+            }
+        });
+
+        taskButtonsDiv.appendChild(completeButton);
+        taskButtonsDiv.appendChild(editButton);
+        taskButtonsDiv.appendChild(deleteButton);
+        
+        listItem.appendChild(taskTextSpan);
+        listItem.appendChild(taskButtonsDiv);
+
+        if (isCompleted) {
+            completedList.appendChild(listItem);
+        } else {
+            taskList.appendChild(listItem);
+        }
+    }
+
+    // Exemplo de tarefas
+    addTask('Estudar CSS avançado');
+    addTask('Comprar mantimentos', true);
 });
-
-function addTask(text) {
-    const li = document.createElement('li');
-    li.textContent = text;
-
-    // Botão para marcar como concluída
-    const completeBtn = document.createElement('button');
-    completeBtn.textContent = 'Concluir';
-    completeBtn.style.background = 'green';
-    completeBtn.style.color = 'white';
-    completeBtn.style.border = 'none';
-    completeBtn.style.padding = '4px 8px';
-    completeBtn.style.borderRadius = '4px';
-    completeBtn.style.cursor = 'pointer';
-
-    completeBtn.addEventListener('click', function() {
-        moveToCompleted(li, text);
-    });
-
-    // Botão de remover
-    const btn = document.createElement('button');
-    btn.textContent = 'Remover';
-    btn.className = 'remove-btn';
-
-    btn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        li.remove();
-    });
-
-    li.appendChild(completeBtn);
-    li.appendChild(btn);
-    list.appendChild(li);
-}
-
-function moveToCompleted(taskItem, text) {
-    taskItem.remove();
-
-    const li = document.createElement('li');
-    li.textContent = text;
-    li.classList.add('completed');
-
-    // Botão de excluir do histórico
-    const btn = document.createElement('button');
-    btn.textContent = 'Excluir';
-    btn.className = 'remove-btn';
-    btn.addEventListener('click', function() {
-        li.remove();
-    });
-
-    li.appendChild(btn);
-    completedList.appendChild(li);
-}
